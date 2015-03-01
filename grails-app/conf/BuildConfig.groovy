@@ -25,7 +25,7 @@ grails.project.dependency.resolution = {
         compile 'com.lowagie:itext:2.1.7'
         compile("com.lowagie:itext-rtf:2.1.7")
         runtime 'xerces:xercesImpl:2.9.0'
-        compile 'org.odftoolkit:odfdom-java:0.8.5'
+        compile 'org.odftoolkit:odfdom-java:0.8.7'
         compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
         compile 'commons-beanutils:commons-beanutils:1.8.3'
     }
