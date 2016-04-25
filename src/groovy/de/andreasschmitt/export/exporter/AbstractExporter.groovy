@@ -37,7 +37,7 @@ abstract class AbstractExporter implements Exporter {
 	}
 	
 	protected Object getValue(Object domain, String field){
-		return formatValue(domain, ExporterUtil.getNestedValue(domain, field), field)
+		return formatValue(domain, ExporterUtil.getNestedValue(domain, field, formatters?.containsKey(field)), field)
 	}
 	
 	protected Writer getOutputStreamWriter(OutputStream outputStream) {

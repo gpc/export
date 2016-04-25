@@ -24,7 +24,7 @@ class ExporterUtil {
 		throw new AssertionError()
 	}
 	
-	public static Object getNestedValue(Object domain, String field){
+	public static Object getNestedValue(Object domain, String field, boolean hasFormatter){
 		try {
 			// Doesn't work for dynamic properties such as tags used in taggable
 			return PropertyUtils.getProperty(domain, field)
@@ -35,13 +35,14 @@ class ExporterUtil {
 			
 			int i = 0
 			def lastProp
+			def lastE
 			for(prop in subProps){
 				if(i == 0){
 					try {
 						lastProp = domain?."$prop"
 					}
 					catch(Exception e){
-						log.info("Couldn't retrieve property ${prop}", e)
+						lastE = e
 					}
 				}
 				else {
@@ -49,10 +50,14 @@ class ExporterUtil {
 						lastProp = lastProp?."$prop"
 					}
 					catch(Exception e){
-						log.info("Couldn't retrieve property ${prop}", e)
+						lastE = e
 					}
 				}
 				i += 1
+			}
+
+			if (lastE && !hasFormatter) {
+				log.info("Couldn't retrieve property ${field}", lastE)
 			}
 			
 			return lastProp
