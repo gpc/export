@@ -1,10 +1,21 @@
 package de.andreasschmitt.export.exporter
 
+import grails.util.Holders
+
+import javax.annotation.PostConstruct
+
 /**
  * @author Andreas Schmitt
  * 
  */
 abstract class AbstractExporter implements Exporter {
+
+	Closure defaultFormatter
+
+	@PostConstruct
+	void postInit() {
+		defaultFormatter = Holders.getFlatConfig().get("export.defaultFormatter")?: ExportConstant.formatByType
+	}
 	
 	List exportFields = [] 
 	Map labels = [:]
@@ -27,12 +38,14 @@ abstract class AbstractExporter implements Exporter {
 		
 		return field
 	}
-	
-	protected Object formatValue(Object domain, Object object, String field){
-		if(formatters?.containsKey(field)){
+
+	protected Object formatValue(Object domain, Object object, String field) {
+		if (formatters?.containsKey(field)) {
 			return formatters[field].call(domain, object)
 		}
-		
+		if (defaultFormatter) {
+			return defaultFormatter.call(domain, object, field)
+		}
 		return object
 	}
 	
