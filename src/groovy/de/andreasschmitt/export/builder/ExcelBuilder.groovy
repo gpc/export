@@ -143,7 +143,7 @@ class ExcelBuilder extends BuilderSupport {
 						}
 					} else {
                         if(attributes?.widthAutoSize){
-                            for(int i = 0; i < attributes.numberOfFields - 1; i++){
+                            for(int i = 0; i < attributes.numberOfFields; i++){
                                 sheet.setColumnView(i, new CellView(autosize: true))
                             }
                         }

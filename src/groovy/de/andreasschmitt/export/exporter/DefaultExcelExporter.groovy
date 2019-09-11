@@ -27,7 +27,7 @@ class DefaultExcelExporter extends AbstractExporter {
 
             builder {
                 workbook(outputStream: outputStream){
-                    sheet(name: getParameters().get("title") ?: "Export", widths: getParameters().get("column.widths"), numberOfFields: data.size(), widthAutoSize: getParameters().get("column.width.autoSize")) {
+                    sheet(name: getParameters().get("title") ?: "Export", widths: getParameters().get("column.widths"), numberOfFields: fields.size(), widthAutoSize: getParameters().get("column.width.autoSize")) {
 
                         format(name: "title") {
                             Alignment alignment = Alignment.GENERAL
