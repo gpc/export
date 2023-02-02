@@ -1,0 +1,7 @@
+exporters:
+  excelExporter: grails.plugins.export.exporter.DefaultExcelExporter
+  csvExporter: grails.plugins.export.exporter.DefaultCSVExporter
+  xmlExporter: grails.plugins.export.exporter.DefaultXMLExporter
+  pdfExporter: grails.plugins.export.exporter.DefaultPDFExporter
+  odsExporter: grails.plugins.export.exporter.DefaultODSExporter
+  rtfExporter: grails.plugins.export.exporter.DefaultRTFExporter
