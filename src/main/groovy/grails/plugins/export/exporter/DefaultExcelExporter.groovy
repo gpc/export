@@ -117,7 +117,7 @@ class DefaultExcelExporter extends AbstractExporter {
 			
         def limitPerSheet = data.size() > maxPerSheet ? maxPerSheet : data.size()
         def sheetsCount = Math.ceil(data.size()/limitPerSheet)
-        log.debug "limitPerSheet:$limitPerSheet ::: sheetsCount:$sheetsCount"
+        //log.debug "limitPerSheet:$limitPerSheet ::: sheetsCount:$sheetsCount"
         return [sheetsCount, limitPerSheet]
     }
 

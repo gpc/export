@@ -66,6 +66,9 @@ grailsPublish {
 
     title = "Grails Export Plugin"
     desc = "This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML and can be extended to add additional formats."
+    websiteUrl = 'https://github.com/gpc/export'
+    vcsUrl = 'https://github.com/gpc/export'
+    issueTrackerUrl = 'https://github.com/gpc/export'
 
     developers = [  graemerocher: 'Graeme Rocher',
                     puneetbehl: 'Puneet Behl',
