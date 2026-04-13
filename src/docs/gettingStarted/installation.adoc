@@ -1,21 +1,12 @@
 [[installation]]
 === Installation
 
-To install the plugin add a dependency to BuildConfig.groovy:
-
-[source, groovy, subs="attributes,verbatim"]
-----
-plugins {
-    compile ":export:1.6"
-}
-----
-
-To install the plugin with Grails 3.x:
+To install the plugin with Grails 7.x:
 
 [source, groovy, subs="attributes,verbatim"]
 ----
 dependencies {
-    compile "org.grails.plugins:export:{revnumber}"
+    implementation ("org.grails.plugins:export:{revnumber}")
 }
 ----
 

@@ -93,7 +93,7 @@ assets {
     excludes = [
             'webjars/jquery/**',
             'webjars/bootstrap/**',
-            'webjars/bootstrap-icons/**'
+            'webjars/bootstrap-icons/**',
     ]
     includes = [
             'webjars/jquery/*/dist/jquery.js',
@@ -106,6 +106,10 @@ assets {
 
 jar {
     exclude 'gsp**'
+    exclude '**/*.svg'
+    exclude '**/*.ico'
+    exclude 'layouts/'
+    exclude 'test/'
 
     List excludes = ['UrlMappings', 'TestController']
     excludes.each {
@@ -128,59 +132,19 @@ publishing {
                     }
                 }
                 developers {
-                    developer {
-                        id = "graemerocher"
-                        name = 'Graeme Rocher'
-                    }
-                    developer {
-                        id = "puneetbehl"
-                        name = 'Puneet Behl'
-                    }
-                    developer {
-                        id = "nwwells"
-                        name = 'Nathan Wells'
-                    }
-                    developer {
-                        id = "tulu"
-                        name = 'Ruben'
-                    }
-                    developer {
-                        id = "arturoojeda"
-                        name = 'Arturo Ojeda López'
-                    }
-                    developer {
-                        id = "fabiooshiro"
-                        name = 'Fabio Issamu Oshiro'
-                    }
-                    developer {
-                        id = "ddelponte"
-                        name = 'Dean Del Ponte'
-                    }
-                    developer {
-                        id = "cristallo"
-                        name = 'Cristiano Limiti'
-                    }
-                    developer {
-                        id = "mirweb"
-                        name = 'Mirko Weber'
-                    }
-                    developer {
-                        id = "joasgarcia"
-                        name = 'Joás Garcia'
-                    }
-                    developer {
-                        id = "frangarcia"
-                        name = 'Fran García'
-                    }
-                    developer {
-                        id = "dustindclark"
-                        name = 'Dustin Clark'
-                    }
-                    developer {
-                        id = "miq"
-                        name = 'Mihael Koep'
-                        email = 'mihael.koep@softwareschneiderei.de'
-                    }
+                    developer { id = "graemerocher"; name = 'Graeme Rocher' }
+                    developer { id = "puneetbehl"; name = 'Puneet Behl' }
+                    developer { id = "nwwells"; name = 'Nathan Wells' }
+                    developer { id = "tulu"; name = 'Ruben' }
+                    developer { id = "arturoojeda"; name = 'Arturo Ojeda López' }
+                    developer { id = "fabiooshiro"; name = 'Fabio Issamu Oshiro' }
+                    developer { id = "ddelponte"; name = 'Dean Del Ponte' }
+                    developer { id = "cristallo"; name = 'Cristiano Limiti' }
+                    developer { id = "mirweb"; name = 'Mirko Weber' }
+                    developer { id = "joasgarcia"; name = 'Joás Garcia' }
+                    developer { id = "frangarcia"; name = 'Fran García' }
+                    developer { id = "dustindclark"; name = 'Dustin Clark' }
+                    developer { id = "miq"; name = 'Mihael Koep'; email = 'mihael.koep@softwareschneiderei.de' }
                 }
             }
 

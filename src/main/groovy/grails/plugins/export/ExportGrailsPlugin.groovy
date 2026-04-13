@@ -9,7 +9,9 @@ class ExportGrailsPlugin extends Plugin {
     def grailsVersion = "7.0.0 > *"
     def dependsOn = [:]
     def pluginExcludes = [
-        "grails-app/views/error.gsp"
+        "grails-app/views/error.gsp",
+		"**/grails/plugins/export/*Controller*",
+		"**/grails/plugins/export/UrlMappings*",
     ]
     def title = "Grails Export Plugin"
     def documentation = "https://gpc.github.io/export/"

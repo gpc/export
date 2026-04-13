@@ -3,7 +3,7 @@
 
 Welcome to the Export plugin for Grails.
 
-This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML and can be extended to add additional formats.
+This plugin offers export functionality supporting different formats e.g. CSV, Excel (xls, xlsx), Open Document Spreadsheet, PDF and XML and can be extended to add additional formats.
 
 include::introduction/license.adoc[]
 
