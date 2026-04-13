@@ -1,0 +1,64 @@
+plugins {
+    id 'config.compile'
+    id 'config.grails-plugin'
+    id 'config.publish'
+    id 'config.testing'
+}
+
+version = projectVersion
+group "io.github.gpc"
+
+dependencies {
+    profile 'org.apache.grails.profiles:web-plugin'
+    console 'org.apache.grails:grails-console'
+
+    compileOnly platform("org.apache.grails:grails-bom:$grailsVersion")
+    compileOnly 'org.apache.grails:grails-dependencies-starter-web'
+
+    testImplementation platform("org.apache.grails:grails-bom:$grailsVersion")
+    testImplementation 'org.apache.grails:grails-dependencies-starter-web'
+    testImplementation 'org.apache.grails:grails-dependencies-test'
+
+    // export plugin specific dependencies
+    api 'com.opencsv:opencsv:5.12.0'
+
+    api 'com.github.librepdf:openpdf:1.4.2'
+    api 'com.github.librepdf:openrtf:1.2.1'
+    runtimeOnly 'xerces:xercesImpl:2.12.2'
+
+    api 'org.odftoolkit:simple-odf:0.9.0'
+    api 'org.apache.poi:poi:5.5.1'
+    api 'org.apache.poi:poi-ooxml:5.5.1'
+
+    api 'commons-beanutils:commons-beanutils:1.11.0'
+    api 'commons-codec:commons-codec:1.21.0'
+
+}
+
+extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
+    it.artifactId = project.name
+    it.githubSlug = 'gpc/export'
+    it.license.name = 'Apache-2.0'
+    it.title = 'Grails Export Plugin'
+    it.desc = 'This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML and can be extended to add additional formats.'
+    it.organization {
+        it.name = 'Grails Plugin Collective (GPC)'
+        it.url = 'https://github.com/gpc'
+    }
+    it.developers = [
+            graemerocher:'Graeme Rocher',
+            puneetbehl: 'Puneet Behl',
+            nwwells: 'Nathan Wells',
+            tulu: 'Ruben',
+            arturoojeda: 'Arturo Ojeda López',
+            fabiooshiro: 'Fabio Issamu Oshiro',
+            ddelponte: 'Dean Del Ponte',
+            cristallo: 'Cristiano Limiti',
+            mirweb: 'Mirko Weber',
+            joasgarcia: 'Joás Garcia',
+            frangarcia: 'Fran García',
+            dustindclark: 'Dustin Clark',
+            miq: 'Mihael Koep',
+            sbglasius: 'Søren Berg Glasius'
+    ]
+}

@@ -1,0 +1,46 @@
+import org.asciidoctor.gradle.jvm.AsciidoctorTask
+
+plugins {
+    id 'org.asciidoctor.jvm.convert'
+}
+
+version = projectVersion
+group = 'io.github.gpc'
+
+def asciidoctorAttributes = [
+        'source-highlighter': 'coderay',
+        toc                 : 'left',
+        toclevels           : '2',
+        'toc-title'         : 'Table of Contents',
+        icons               : 'font',
+        id                  : "${project.name - '-docs'}:${project.version}",
+        idprefix            : '',
+        idseparator         : '-',
+        version             : project.version,
+        projectUrl          : 'https://github.com/gpc/export',
+        sourcedir           : "${rootProject.allprojects.find { it.name == 'export' }.projectDir}/src/main/groovy",
+        grailsVersion       : grailsVersion
+//        grailsDocBase       : "https://grails.apache.org/docs/${resolveGrailsDocsDirName(project.grailsVersion)}"
+]
+
+tasks.named('asciidoctor', AsciidoctorTask) {
+
+    outputDir = project.layout.buildDirectory.dir('docs')
+    sourceDir = project.layout.projectDirectory.dir('src/docs')
+
+    attributes(asciidoctorAttributes)
+    baseDirFollowsSourceDir()
+    options(doctype: 'book')
+    sources { include 'index.adoc' }
+
+    jvm {
+        jvmArgs(
+                '--add-opens', 'java.base/java.io=ALL-UNNAMED',
+                '--add-opens', 'java.base/sun.nio.ch=ALL-UNNAMED'
+        )
+    }
+}
+
+static String resolveGrailsDocsDirName(String version) {
+    version.endsWith('-SNAPSHOT') ? 'snapshot' : version
+}
