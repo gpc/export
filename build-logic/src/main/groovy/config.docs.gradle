@@ -60,12 +60,39 @@ tasks.register('copyAsciiDoctorDocs', Copy) {
 
 }
 
-tasks.register('ghPagesRootIndexPage', Copy) {
-    description = 'Provides a root index page for historical versions that are currently managed manually'
+tasks.register('ghPagesRootIndexPage') {
+    description = 'Provides a root index page with historical versions fetched from the gh-pages branch at build time'
     group = 'documentation'
 
-    from(docProject.map { it.layout.projectDirectory.file('src/docs/index.tmpl') })
-    into(rootProject.layout.buildDirectory.dir('docs'))
-    rename('index.tmpl', 'ghpages.html')
+    def templateFile = docProject.map { it.layout.projectDirectory.file('src/docs/index.tmpl') }
+    def outputFile   = rootProject.layout.buildDirectory.file('docs/ghpages.html')
 
+    inputs.file(templateFile)
+    outputs.file(outputFile)
+
+    doLast {
+        List<String> versions = []
+        try {
+            def conn = URI.create('https://api.github.com/repos/gpc/grails-export/contents/?ref=gh-pages').toURL().openConnection()
+            conn.setRequestProperty('Accept', 'application/vnd.github+json')
+            conn.setRequestProperty('User-Agent', 'gradle-docs-build')
+            def parsed = new groovy.json.JsonSlurper().parse(conn.inputStream)
+            versions = (parsed as List)
+                .findAll { it.type == 'dir' }
+                .collect { it.name as String }
+                .findAll { it ==~ /\d+\.\d+\.(\d+|x)(-.*)?/ }
+                .sort()
+                .reverse()
+        } catch (Exception e) {
+            logger.warn("ghPagesRootIndexPage: could not fetch GitHub versions — ${e.message}")
+        }
+
+        String optionsHtml = versions
+            ? versions.collect { v -> "<option value=\"${v}\">${v}</option>" }.join('\n                    ')
+            : '<option value="" disabled>No previous versions available</option>'
+
+        def out = outputFile.get().asFile
+        out.parentFile.mkdirs()
+        out.text = templateFile.get().asFile.text.replace('@OTHER_VERSIONS_OPTIONS@', optionsHtml)
+    }
 }
