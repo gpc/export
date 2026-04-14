@@ -1,0 +1,80 @@
+[[versionHistory]]
+=== Version History
+
+Find project history on https://github.com/gpc/export/releases
+
+* April, 2025 (version 7.0.x-SNAPSHOT)
+** Major upgrade to Grails 7.0.x
+** Build system replaced
+** Project restructured
+* July, 18, 2012 (version 1.5)
+** more hidden internal domain attributes excluded
+* July, 18, 2012 (version 1.4)
+** Missing shadow.jpg file added
+* May, 18, 2012 (version 1.3)
+** Option to disable header output added (header.enabled)
+* May, 2, 2012 (version 1.2)
+** Exporter caching fields issue fixed
+* February, 11, 2012 (version 1.1)
+** Support for resources plugin added
+** ConfigurationHolder removed
+* July, 10, 2011 (version 1.0)
+** bug fixes
+** Excel now converts URLs to hyperlinks
+* March, 13, 2011 (version 0.9)
+** bug fixes
+** Excel now supports title and column widths parameters
+* January, 16, 2011 (version 0.8)
+** bug fixes
+** PDF support for multiple header rows and page orientation
+** DSL dependency management
+* April, 10, 2010 (version 0.7)
+** multiple bug fixes
+** enhanced formatter closure with access to the current domain object
+** CSV
+**** encoding (text encoding)
+** PDF
+**** font.family (global font family setting)
+**** title.encoding (encoding for title font)
+**** header.encoding (encoding for header font)
+**** text.encoding (encoding for text font)
+**** pdf.encoding (global font encoding)
+**** column.widths (allows to set different column widths)
+** RTF
+**** font.family (global font family setting)
+**** title.encoding (encoding for title font)
+**** header.encoding (encoding for header font)
+**** text.encoding (encoding for text font)
+**** rtf.encoding (global font encoding)
+**** column.widths (allows to set different column widths)
+** XML
+**** encoding (text encoding)
+**** xml.root (specify root element name)
+**** depth (depth for building tree affects how collections and relationships are exported)
+* November, 7, 2009 (version 0.6)
+** Better support for inherited domain class attributes
+* September 28, 2009 (version 0.5)
+** ODS export issues fixed
+* August 15, 2009 (version 0.4)
+** CSV
+**** quoteChar fixed
+**** lineEnd added
+** PDF
+**** border.color added
+**** separator.color added
+* May 31, 2009 (version 0.3)
+** Excel file extension is now xls
+** RTF export added
+** Null values are now treated gracefully
+** Specify nonexistant fields and create output for them with closures e.g. for static content like today's date
+* Apr. 16, 2009 (version 0.2)
+** Issue with missing xercesImpl.jar fixed
+** Additional output parameters to PDF export added e.g. encoding, font size
+* Feb. 15, 2009 (version 0.1)
+** Initial version released
+** Supported formats
+**** CSV
+**** Excel
+**** ODS
+**** PDF
+**** XML

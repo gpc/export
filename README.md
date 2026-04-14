@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/gpc/export.svg)](https://travis-ci.org/gpc/export)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.gpc/export)](https://img.shields.io/maven-central/v/io.github.gpc/export)
+[![License](https://img.shields.io/github/license/gpc/export)](https://www.apache.org/licenses/LICENSE-2.0)
+[![CI](https://github.com/gpc/export/actions/workflows/ci.yml/badge.svg?event=push)](https://github.com/gpc/export/actions/workflows/ci.yml)
 
 Grails Export Plugin
 ====================
