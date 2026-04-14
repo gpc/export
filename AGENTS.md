@@ -1,4 +1,4 @@
-# CLAUDE.md - export
+# AGENTS.md - export
 
 ## Project Overview
 

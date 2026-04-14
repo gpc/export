@@ -58,7 +58,6 @@ tasks.register('copyAsciiDoctorDocs', Copy) {
     include('docs/**')
     includeEmptyDirs = false
 
-    dependsOn('docs')
 }
 
 tasks.register('ghPagesRootIndexPage', Copy) {
@@ -69,6 +68,4 @@ tasks.register('ghPagesRootIndexPage', Copy) {
     into(rootProject.layout.buildDirectory.dir('docs'))
     rename('index.tmpl', 'ghpages.html')
 
-    dependsOn('docs')
 }
-
