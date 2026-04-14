@@ -226,6 +226,42 @@
             text-decoration: underline;
         }
 
+        .version-selector {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .version-select {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 0.9375rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1.25rem;
+            padding-right: 2.5rem;
+        }
+
+        .version-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 159, 108, 0.15);
+        }
+
+        .version-nav-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
         @media (max-width: 640px) {
             .hero {
                 padding: 3rem 1.5rem;
@@ -271,13 +307,13 @@
                 <span class="version-badge latest">Latest Release</span>
                 <h3>Stable Version</h3>
                 <div class="links">
-                    <a href="/export/latest/" class="link">
+                    <a href="/grails-export/latest/" class="link">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
                         User Guide
                     </a>
-                    <a href="/export/latest/gapi/" class="link">
+                    <a href="/grails-export/latest/gapi/" class="link">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                         </svg>
@@ -290,13 +326,37 @@
                 <span class="version-badge snapshot">Snapshot</span>
                 <h3>Development Version</h3>
                 <div class="links">
-                    <a href="/export/snapshot/" class="link">
+                    <a href="/grails-export/snapshot/" class="link">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                         </svg>
                         User Guide
                     </a>
-                    <a href="/export/snapshot/gapi/" class="link">
+                    <a href="/grails-export/snapshot/gapi/" class="link">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                        API Reference
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">Other Versions</h2>
+        <div class="doc-card" style="margin-bottom: 3rem;">
+            <div class="version-selector">
+                <select id="versionSelect" class="version-select">
+                    <option value="" disabled selected>Select a version&hellip;</option>
+                    @OTHER_VERSIONS_OPTIONS@
+                </select>
+                <div class="version-nav-links">
+                    <a id="versionUserGuide" href="#" class="link">
+                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        User Guide
+                    </a>
+                    <a id="versionApiRef" href="#" class="link">
                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
                         </svg>
@@ -306,6 +366,21 @@
             </div>
         </div>
     </main>
+
+    <script>
+        (function () {
+            var sel   = document.getElementById('versionSelect');
+            var guide = document.getElementById('versionUserGuide');
+            var api   = document.getElementById('versionApiRef');
+            function update() {
+                var v = sel.value;
+                if (!v) return;
+                guide.href = '/grails-export/' + v + '/';
+                api.href   = '/grails-export/' + v + '/gapi/';
+            }
+            sel.addEventListener('change', update);
+        })();
+    </script>
 
     <footer class="footer">
         <p>Built by the <a href="https://github.com/gpc">Grails Plugin Collective (GPC)</a> team</p>
