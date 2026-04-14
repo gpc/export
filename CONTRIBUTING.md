@@ -1,4 +1,4 @@
-# Contributing to Grails Server Timing
+# Contributing to Export
 
 Thank you for your interest in contributing! This guide will help you get started.
 
