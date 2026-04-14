@@ -31,7 +31,7 @@ Detailed best practices are documented in `.skills/`:
 2. **The plugin project contains ONLY plugin code and unit tests.** No integration tests, no functional tests, no
    example controllers or views.
 3. **Example apps under `examples/` host all integration and functional tests.** They depend on the plugin via
-   `implementation project(':export')` and test it as a real consumer would.
+   `implementation project(':grails-export')` and test it as a real consumer would.
 4. **Use Gradle convention plugins to deduplicate.** If two or more subprojects share build logic, extract it into a
    convention plugin in `build-logic/`.
 5. **Always use lazy Gradle APIs** to avoid eager initialization (`tasks.register()`, `tasks.named()`, `configureEach`,
@@ -42,7 +42,7 @@ Detailed best practices are documented in `.skills/`:
 ```
 export/
 ├── .skills/             # Best practice skill files
-├── plugin/              # Core Grails plugin (artifact: export)
+├── plugin/              # Core Grails plugin (artifact: grails-export)
 │   ├── grails-app/      #   Plugin services, taglibs, and conf
 │   └── src/main/        #   Plugin source code (exporters, builder, etc.)
 ├── examples/app1/       # Example Grails app
@@ -62,7 +62,7 @@ export/
 ./gradlew build
 
 # Run only unit tests (plugin module)
-./gradlew :export:test
+./gradlew :grails-export:test
 
 # Run integration tests (example app)
 ./gradlew :app1:integrationTest

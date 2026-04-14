@@ -34,12 +34,12 @@ buildCache {
     local { enabled = (isLocal && !isReproducibleBuild) || (isCI && isReproducibleBuild) }
 }
 
-rootProject.name = 'export-root'
+rootProject.name = 'grails-export-root'
 
 include('plugin')
-project(':plugin').name = 'export'
+project(':plugin').name = 'grails-export'
 include('docs')
-project(':docs').name = 'export-docs'
+project(':docs').name = 'grails-export-docs'
 
 file('examples').listFiles({ it.directory } as FileFilter).each {
     include(it.name)

@@ -12,7 +12,7 @@ class ExportGrailsPlugin extends Plugin {
     def dependsOn = [:]
 
     def title = "Grails Export Plugin"
-    def documentation = "https://gpc.github.io/export/"
+    def documentation = "https://gpc.github.io/grails-export/"
     def author = "Grails Plugin Collective"
     def authorEmail = "grails.plugin.collective@gmail.com"
     def description = '''\
@@ -21,8 +21,8 @@ and can be extended to add additional formats.
 '''
     def license = 'APACHE'
     def organization = [name: 'Grails Plugin Collective', url: 'https://github.com/gpc']
-    def issueManagement = [system: 'Github', url: 'https://github.com/gpc/export/issues']
-    def scm = [url: 'https://github.com/gpc/export']
+    def issueManagement = [system: 'Github', url: 'https://github.com/gpc/grails-export/issues']
+    def scm = [url: 'https://github.com/gpc/grails-export']
 
 
     Closure doWithSpring() {

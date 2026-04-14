@@ -9,7 +9,7 @@ dependencies {
     profile 'org.apache.grails.profiles:web'
     console 'org.apache.grails:grails-console'
 
-    implementation project(':export')
+    implementation project(':grails-export')
 
     implementation platform("org.apache.grails:grails-bom:$grailsVersion")
     implementation "org.springframework.boot:spring-boot-starter-logging"

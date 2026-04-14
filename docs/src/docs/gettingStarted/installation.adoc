@@ -6,8 +6,8 @@ To install the plugin with Grails 7.x:
 [source, groovy, subs="attributes,verbatim"]
 ----
 dependencies {
-    implementation ("io.github.gpc:export:{revnumber}")
+    implementation ("io.github.gpc:grails-export:{revnumber}")
 }
 ----
 
-You can find the dependency declaration for the latest version on the https://grails.org/plugins.html#plugin/io.github.gpc:export[plugin portal page].
+You can find the dependency declaration for the latest version on the https://grails.org/plugins.html#plugin/io.github.gpc:grails-export[plugin portal page].
