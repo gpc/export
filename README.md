@@ -5,8 +5,11 @@
 Grails Export Plugin
 ====================
 
-Primary fork of the original export plugin. Sources forked from SVN and maintained here.
+The official Grails Export Plugin. 
 
 The user guide can be found here: [Documentation]
 
+This was previously forked from [Nathan Wells]
+
 [Documentation]: https://gpc.github.io/grails-export/
+[Nathan Wells]: https://github.com/nwwells/grails-export
