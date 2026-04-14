@@ -3,4 +3,4 @@
 
 This plugin is released under the http://www.apache.org/licenses/LICENSE-2.0[Apache License, Version 2.0]
 
-Please refer to https://github.com/gpc/export/blob/master/LICENSE.txt for more information about licensing scheme of https://github.com/gpc/export/[Grails Export]
+Please refer to https://github.com/gpc/grails-export/blob/master/LICENSE.txt for more information about licensing scheme of https://github.com/gpc/grails-export/[Grails Export]

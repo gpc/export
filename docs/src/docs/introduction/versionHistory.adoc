@@ -1,7 +1,7 @@
 [[versionHistory]]
 === Version History
 
-Find project history on https://github.com/gpc/export/releases
+Find project history on https://github.com/gpc/grails-export/releases
 
 * April, 2025 (version 7.0.x-SNAPSHOT)
 ** Major upgrade to Grails 7.0.x

@@ -21,7 +21,7 @@ curl -s "https://get.sdkman.io" | bash
 
 ```bash
 # Clone the repository
-git clone https://github.com/gpc/export.git
+git clone https://github.com/gpc/grails-export.git
 cd export
 
 # Install the required SDK versions (Java 17, Gradle 8.14.4, Groovy 4.0.30)
@@ -143,12 +143,12 @@ categorize changes in release notes.
 ## Reporting Issues
 
 - Use
-  the [bug report template](https://github.com/gpc/export/issues/new?template=bug_report.yml)
+  the [bug report template](https://github.com/gpc/grails-export/issues/new?template=bug_report.yml)
   for bugs
 - Use
-  the [feature request template](https://github.com/gpc/export/issues/new?template=feature_request.yml)
+  the [feature request template](https://github.com/gpc/grails-export/issues/new?template=feature_request.yml)
   for enhancements
-- Check [existing issues](https://github.com/gpc/export/issues) before creating a new one
+- Check [existing issues](https://github.com/gpc/grails-export/issues) before creating a new one
 
 ## Security Vulnerabilities
 

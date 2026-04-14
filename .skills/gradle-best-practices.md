@@ -166,7 +166,7 @@ When configuring project extensions (like publishing metadata or third-party plu
 // GOOD - explicit it in extensions.configure() for type hints
 extensions.configure(GrailsPublishExtension) {
     it.artifactId = project.name
-    it.githubSlug = 'gpc/export'
+    it.githubSlug = 'gpc/grails-export'
     it.license.name = 'Apache-2.0'
     it.title = 'My Plugin'
     it.developers = [name: 'Developer Name']

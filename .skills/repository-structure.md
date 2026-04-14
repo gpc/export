@@ -121,7 +121,7 @@ It does NOT contain integration tests, functional tests, example controllers, or
 
 All tests requiring a running Grails application live in example apps under `examples/`. Each app:
 
-- Depends on the plugin via `implementation project(':export')`
+- Depends on the plugin via `implementation project(':grails-export')`
 - Contains test controllers and views that exercise the plugin
 - Contains integration tests under `src/integration-test/`
 - Is auto-discovered by `settings.gradle`
