@@ -60,7 +60,7 @@ jobs:
           -PskipCodeStyle
   publish:
     # only run the publishing task on this repo (not on forks)
-    if: github.repository_owner == 'grails-plugins' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    if: github.repository_owner == 'gpc' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: build
     name: "Publish Snapshot"
     runs-on: ubuntu-24.04
