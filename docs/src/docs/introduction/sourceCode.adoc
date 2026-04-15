@@ -3,10 +3,8 @@
 
 The full source code for this plugin can be found on https://github.com/gpc/grails-export[GitHub].
 
-The master branch is for the Grails 3.x version. The code for the Grails 2.x version is on branch: `grails-2.x`.
+Current development takes place on the 7.0.x branch.
+
+The grails-3.x branch is for the Grails 3.x to 6.x version.
 
 For issues, improvements or new features go to the plugin's go to https://github.com/gpc/grails-export/issues[GitHub issues].
-
-To contact me directly my email address is puneet DOT behl007 AT gmail DOT com
-
-Feel free to send me any correction about this document.

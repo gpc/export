@@ -3,8 +3,10 @@
 
 Find project history on https://github.com/gpc/grails-export/releases
 
-* April, 2025 (version 7.0.x-SNAPSHOT)
+* April 14, 2026 (version 7.0.0)
 ** Major upgrade to Grails 7.0.x
+** Use Apache POI instead of jexcelapi for MS Excel file formats
+** New support for OOXML (xlsx) file format
 ** Build system replaced
 ** Project restructured
 * July, 18, 2012 (version 1.5)

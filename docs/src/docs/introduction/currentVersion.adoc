@@ -6,7 +6,7 @@ Current version is *{revnumber}* (for Grails 2.x the latest version is *1.6*)
 |===
 | Plugin release   | Supported Grails Version
 | 7.0.0            | > 7.0
-| 2.0.0            | 3.0 > 6.0
+| 2.0.0            | 3.0 > 6.x
 | 1.6              | 1.3 > 3.0
 |===
 
