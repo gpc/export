@@ -607,7 +607,7 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2.0.0</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">3.0 &gt; 6.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3.0 &gt; 6.x</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1.6</p></td>
@@ -627,11 +627,17 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="ulist">
 <ul>
 <li>
-<p>April, 2025 (version 7.0.x-SNAPSHOT)</p>
+<p>April 14, 2026 (version 7.0.0)</p>
 <div class="ulist">
 <ul>
 <li>
 <p>Major upgrade to Grails 7.0.x</p>
+</li>
+<li>
+<p>Use Apache POI instead of jexcelapi for MS Excel file formats</p>
+</li>
+<li>
+<p>New support for OOXML (xlsx) file format</p>
 </li>
 <li>
 <p>Build system replaced</p>
@@ -989,6 +995,12 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <li>
 <p><a href="https://github.com/dustindclark">Dustin Clark</a></p>
 </li>
+<li>
+<p><a href="https://github.com/miq">Mihael Koep</a></p>
+</li>
+<li>
+<p><a href="https://github.com/sbglasius">Søren Berg Glasius</a></p>
+</li>
 </ul>
 </div>
 </div>
@@ -998,16 +1010,13 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <p>The full source code for this plugin can be found on <a href="https://github.com/gpc/grails-export">GitHub</a>.</p>
 </div>
 <div class="paragraph">
-<p>The master branch is for the Grails 3.x version. The code for the Grails 2.x version is on branch: <code>grails-2.x</code>.</p>
+<p>Current development takes place on the 7.0.x branch.</p>
+</div>
+<div class="paragraph">
+<p>The grails-3.x branch is for the Grails 3.x to 6.x version.</p>
 </div>
 <div class="paragraph">
 <p>For issues, improvements or new features go to the plugin&#8217;s go to <a href="https://github.com/gpc/grails-export/issues">GitHub issues</a>.</p>
-</div>
-<div class="paragraph">
-<p>To contact me directly my email address is puneet DOT behl007 AT gmail DOT com</p>
-</div>
-<div class="paragraph">
-<p>Feel free to send me any correction about this document.</p>
 </div>
 </div>
 </div>
@@ -1018,17 +1027,27 @@ table.CodeRay td.code{padding:0 0 0 .75em}
 <div class="sect2">
 <h3 id="installation">Installation</h3>
 <div class="paragraph">
-<p>To install the plugin with Grails 7.x:</p>
+<p>To use the plugin with Grails 7.x:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
-    implementation (<span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.gpc:grails-export:7.0.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>)
+    implementation <span class="string"><span class="delimiter">&quot;</span><span class="content">io.github.gpc:grails-export:7.0.1-SNAPSHOT</span><span class="delimiter">&quot;</span></span>
 }</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>You can find the dependency declaration for the latest version on the <a href="https://grails.org/plugins.html#plugin/io.github.gpc:grails-export">plugin portal page</a>.</p>
+</div>
+<div class="paragraph">
+<p>For usage with Grails 3.x to 6.x you have to use plugin version 2.0.0 available at the old coordinates:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="groovy">dependencies {
+    implementation <span class="string"><span class="delimiter">&quot;</span><span class="content">org.grails.plugins:export:2.0.0</span><span class="delimiter">&quot;</span></span>
+}</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -1591,7 +1610,7 @@ Map parameters = [<span class="string"><span class="delimiter">&quot;</span><spa
 <div id="footer">
 <div id="footer-text">
 Version 7.0.1-SNAPSHOT<br>
-Last updated 2026-04-14 12:15:35 UTC
+Last updated 2026-04-15 10:16:42 UTC
 </div>
 </div>
 </body>
