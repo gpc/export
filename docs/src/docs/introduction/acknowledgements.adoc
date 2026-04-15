@@ -15,3 +15,5 @@ Following are the plugin contributors:
 * https://github.com/joasgarcia[Joás Garcia]
 * https://github.com/frangarcia[Fran García]
 * https://github.com/dustindclark[Dustin Clark]
+* https://github.com/miq[Mihael Koep]
+* https://github.com/sbglasius[Søren Berg Glasius]
