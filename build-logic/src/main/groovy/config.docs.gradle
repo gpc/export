@@ -71,9 +71,12 @@ tasks.register('ghPagesRootIndexPage') {
     outputs.file(outputFile)
 
     doLast {
+        def githubUser    = rootProject.findProperty('githubUser') as String
+        def githubProject = rootProject.findProperty('githubProject') as String
+
         List<String> versions = []
         try {
-            def conn = URI.create('https://api.github.com/repos/gpc/grails-export/contents/?ref=gh-pages').toURL().openConnection()
+            def conn = URI.create("https://api.github.com/repos/${githubUser}/${githubProject}/contents/?ref=gh-pages").toURL().openConnection()
             conn.setRequestProperty('Accept', 'application/vnd.github+json')
             conn.setRequestProperty('User-Agent', 'gradle-docs-build')
             def parsed = new groovy.json.JsonSlurper().parse(conn.inputStream)
@@ -91,8 +94,17 @@ tasks.register('ghPagesRootIndexPage') {
             ? versions.collect { v -> "<option value=\"${v}\">${v}</option>" }.join('\n                    ')
             : '<option value="" disabled>No previous versions available</option>'
 
+        def tokens = [
+            '@OTHER_VERSIONS_OPTIONS@': optionsHtml,
+            '@GITHUB_REPO_URL@'       : "https://github.com/${githubUser}/${githubProject}",
+            '@GITHUB_ORG_URL@'        : "https://github.com/${githubUser}",
+            '@REPO_SLUG@'             : githubProject,
+        ]
+
         def out = outputFile.get().asFile
         out.parentFile.mkdirs()
-        out.text = templateFile.get().asFile.text.replace('@OTHER_VERSIONS_OPTIONS@', optionsHtml)
+        def content = templateFile.get().asFile.text
+        tokens.each { token, value -> content = content.replace(token, value) }
+        out.text = content
     }
 }
