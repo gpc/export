@@ -1,8 +1,11 @@
+import org.gradle.api.publish.maven.tasks.GenerateMavenPom
+
 plugins {
     id 'config.compile'
     id 'config.grails-plugin'
     id 'config.publish'
     id 'config.testing'
+    id 'config.contributors'
 }
 
 version = projectVersion
@@ -36,8 +39,6 @@ dependencies {
 }
 
 extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
-    def githubUser    = rootProject.findProperty('githubOrg')
-    def githubProject = rootProject.findProperty('githubProject')
     it.artifactId = project.name
     it.githubSlug = "${githubOrg}/${githubProject}"
     it.license.name = 'Apache-2.0'
@@ -47,20 +48,20 @@ extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
         it.name = "${projectOrg}"
         it.url = "https://github.com/${githubOrg}"
     }
-    it.developers = [
-            graemerocher:'Graeme Rocher',
-            puneetbehl: 'Puneet Behl',
-            nwwells: 'Nathan Wells',
-            tulu: 'Ruben',
-            arturoojeda: 'Arturo Ojeda López',
-            fabiooshiro: 'Fabio Issamu Oshiro',
-            ddelponte: 'Dean Del Ponte',
-            cristallo: 'Cristiano Limiti',
-            mirweb: 'Mirko Weber',
-            joasgarcia: 'Joás Garcia',
-            frangarcia: 'Fran García',
-            dustindclark: 'Dustin Clark',
-            miq: 'Mihael Koep',
-            sbglasius: 'Søren Berg Glasius'
-    ]
+}
+
+pluginManager.withPlugin('maven-publish') {
+    tasks.withType(GenerateMavenPom).configureEach { pomTask ->
+        dependsOn(tasks.named('fetchContributors'))
+        doFirst {
+            pomTask.pom.developers { spec ->
+                contributorsData.get().each { String login, String displayName ->
+                    spec.developer {
+                        id = login
+                        name = displayName
+                    }
+                }
+            }
+        }
+    }
 }
