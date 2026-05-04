@@ -2,6 +2,7 @@ package contributor
 
 import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
+import groovy.yaml.YamlBuilder
 import groovy.yaml.YamlSlurper
 
 import org.gradle.api.DefaultTask
@@ -13,7 +14,6 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.TaskAction
-import org.gradle.internal.impldep.org.testng.internal.YamlParser
 
 abstract class ContributorTask extends DefaultTask {
 
@@ -35,15 +35,8 @@ abstract class ContributorTask extends DefaultTask {
         yamlOutput.map { regularFile ->
             def yamlFile = regularFile.asFile
             if (!yamlFile.exists()) return Collections.<String, String> emptyMap()
-            yamlFile.readLines()
-                    .findAll { it.startsWith('  ') && it.contains(': ') }
-                    .collectEntries { line ->
-                        def colon = line.indexOf(': ')
-                        def key = line.substring(2, colon)
-                        def raw = line.substring(colon + 2).trim()
-                        def val = (raw.startsWith("'") && raw.endsWith("'")) ? raw[1..-2].replace("''", "'") : raw
-                        [(key): val]
-                    } as Map<String, String>
+            def yaml = new YamlSlurper().parse(yamlFile) as Map<String, Serializable>
+            yaml.contributors as Map<String, String>
         }
     }
 
@@ -88,8 +81,8 @@ abstract class ContributorTask extends DefaultTask {
                 .findAll { loginMap[it] }
                 .collectEntries { id -> [loginMap[id], nameLookup[id] ?: loginMap[id]] } as Map<String, String>
 
-        outputFile.text = "contributors:\n" + finalMap.collect { k, v ->
-            "  $k: '${v.replace("'", "''")}'"
-        }.join("\n")
+        YamlBuilder yaml = new YamlBuilder()
+        yaml contributors: finalMap
+        outputFile.text = yaml.toString()
     }
 }
