@@ -17,7 +17,7 @@ def asciidoctorAttributes = [
         idprefix            : '',
         idseparator         : '-',
         version             : project.version,
-        projectUrl          : "https://github.com/${rootProject.findProperty('githubUser')}/${rootProject.findProperty('githubProject')}",
+        projectUrl          : "https://github.com/${rootProject.findProperty('githubOrg')}/${rootProject.findProperty('githubProject')}",
         sourcedir           : "${rootProject.allprojects.find { it.name == 'grails-export' }.projectDir}/src/main/groovy",
         grailsVersion       : grailsVersion
 ]

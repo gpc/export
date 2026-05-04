@@ -71,13 +71,13 @@ tasks.register('ghPagesRootIndexPage') {
     outputs.file(outputFile)
 
     doLast {
-        def githubUser = rootProject.findProperty('githubUser') as String
+        def githubOrg = rootProject.findProperty('githubOrg') as String
         def githubProject = rootProject.findProperty('githubProject') as String
 
         List<String> versions = []
         String latestVersion = ""
         try {
-            def conn = URI.create("https://api.github.com/repos/${githubUser}/${githubProject}/contents/?ref=gh-pages").toURL().openConnection()
+            def conn = URI.create("https://api.github.com/repos/${githubOrg}/${githubProject}/contents/?ref=gh-pages").toURL().openConnection()
             conn.setRequestProperty('Accept', 'application/vnd.github+json')
             conn.setRequestProperty('User-Agent', 'gradle-docs-build')
             def parsed = new groovy.json.JsonSlurper().parse(conn.inputStream)
@@ -111,8 +111,8 @@ tasks.register('ghPagesRootIndexPage') {
         def tokens = [
                 '@LATEST_VERSION@'        : latestVersion,
                 '@OTHER_VERSIONS_OPTIONS@': optionsHtml,
-                '@GITHUB_REPO_URL@'       : "https://github.com/${githubUser}/${githubProject}",
-                '@GITHUB_ORG_URL@'        : "https://github.com/${githubUser}",
+                '@GITHUB_REPO_URL@'       : "https://github.com/${githubOrg}/${githubProject}",
+                '@GITHUB_ORG_URL@'        : "https://github.com/${githubOrg}",
                 '@PROJECT_TITLE@'         : "${projectTitle}",
                 '@PROJECT_DESCRIPTION@'   : "${projectDescription}",
                 '@PROJECT_ORG@'           : "${projectOrg}",

@@ -36,16 +36,16 @@ dependencies {
 }
 
 extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
-    def githubUser    = rootProject.findProperty('githubUser')
+    def githubUser    = rootProject.findProperty('githubOrg')
     def githubProject = rootProject.findProperty('githubProject')
     it.artifactId = project.name
-    it.githubSlug = "${githubUser}/${githubProject}"
+    it.githubSlug = "${githubOrg}/${githubProject}"
     it.license.name = 'Apache-2.0'
     it.title = "${projectTitle}"
     it.desc = "${projectDescription}"
     it.organization {
         it.name = "${projectOrg}"
-        it.url = "https://github.com/${githubUser}"
+        it.url = "https://github.com/${githubOrg}"
     }
     it.developers = [
             graemerocher:'Graeme Rocher',
