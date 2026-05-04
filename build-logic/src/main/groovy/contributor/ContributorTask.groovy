@@ -34,9 +34,9 @@ abstract class ContributorTask extends DefaultTask {
     Provider<Map<String, String>> getContributors() {
         yamlOutput.map { regularFile ->
             def yamlFile = regularFile.asFile
-            if (!yamlFile.exists()) return Collections.<String, String> emptyMap()
+            if (!yamlFile.exists()) return Collections.<String, String>emptyMap()
             def yaml = new YamlSlurper().parse(yamlFile) as Map<String, Serializable>
-            yaml.contributors as Map<String, String>
+            (yaml.contributors ?: [:]) as Map<String, String>
         }
     }
 
@@ -48,7 +48,9 @@ abstract class ContributorTask extends DefaultTask {
 
         if (!token) {
             logger.warn("No GITHUB_TOKEN — skipping contributor fetch for ${repoOwner.get()}/${repoName.get()}")
-            outputFile.text = "contributors:\n"
+            YamlBuilder emptyYaml = new YamlBuilder()
+            emptyYaml contributors: [:]
+            outputFile.text = emptyYaml.toString()
             return
         }
 
