@@ -41,10 +41,10 @@ extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
     it.artifactId = project.name
     it.githubSlug = "${githubUser}/${githubProject}"
     it.license.name = 'Apache-2.0'
-    it.title = 'Grails Export Plugin'
-    it.desc = 'This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML and can be extended to add additional formats.'
+    it.title = "${projectTitle}"
+    it.desc = "${projectDescription}"
     it.organization {
-        it.name = 'Grails Plugin Collective (GPC)'
+        it.name = "${projectOrg}"
         it.url = "https://github.com/${githubUser}"
     }
     it.developers = [

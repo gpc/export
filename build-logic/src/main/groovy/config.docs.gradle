@@ -65,40 +65,58 @@ tasks.register('ghPagesRootIndexPage') {
     group = 'documentation'
 
     def templateFile = docProject.map { it.layout.projectDirectory.file('src/docs/index.tmpl') }
-    def outputFile   = rootProject.layout.buildDirectory.file('docs/ghpages.html')
+    def outputFile = rootProject.layout.buildDirectory.file('docs/ghpages.html')
 
     inputs.file(templateFile)
     outputs.file(outputFile)
 
     doLast {
-        def githubUser    = rootProject.findProperty('githubUser') as String
+        def githubUser = rootProject.findProperty('githubUser') as String
         def githubProject = rootProject.findProperty('githubProject') as String
 
         List<String> versions = []
+        String latestVersion = ""
         try {
             def conn = URI.create("https://api.github.com/repos/${githubUser}/${githubProject}/contents/?ref=gh-pages").toURL().openConnection()
             conn.setRequestProperty('Accept', 'application/vnd.github+json')
             conn.setRequestProperty('User-Agent', 'gradle-docs-build')
             def parsed = new groovy.json.JsonSlurper().parse(conn.inputStream)
             versions = (parsed as List)
-                .findAll { it.type == 'dir' }
-                .collect { it.name as String }
-                .findAll { it ==~ /\d+\.\d+\.(\d+|x)(-.*)?/ }
-                .sort()
-                .reverse()
+                    .findAll { it.type == 'dir' }
+                    .collect { it.name as String }
+                    .findAll { it ==~ /\d+\.\d+\.(\d+|x)(-.*)?/ }
+                    .toSorted { a, b ->
+                        // Parse into [major, minor, patch, qualifier]
+                        // patch 'x' becomes -1 so it sorts below any numeric patch
+                        // qualifier '' (stable) sorts above any pre-release string
+                        def parseVer = { String v ->
+                            def m = v =~ /^(\d+)\.(\d+)\.(x|\d+)(?:-(.+))?$/
+                            if (!m) return [0, 0, -2, '']
+                            [m[0][1] as int, m[0][2] as int, m[0][3] == 'x' ? -1 : m[0][3] as int, m[0][4] ?: '']
+                        }
+                        def av = parseVer(a)
+                        def bv = parseVer(b)
+                        return bv[0] <=> av[0] ?: bv[1] <=> av[1] ?: bv[2] <=> av[2] ?:
+                                (!av[3] && bv[3] ? -1 : av[3] && !bv[3] ? 1 : bv[3] <=> av[3]) // RC and other postfix versions
+                    }
+            latestVersion = versions ? versions.first() : ''
         } catch (Exception e) {
             logger.warn("ghPagesRootIndexPage: could not fetch GitHub versions — ${e.message}")
         }
 
         String optionsHtml = versions
-            ? versions.collect { v -> "<option value=\"${v}\">${v}</option>" }.join('\n                    ')
-            : '<option value="" disabled>No previous versions available</option>'
+                ? versions.collect { v -> "<option value=\"${v}\">${v}</option>" }.join('\n                    ')
+                : '<option value="" disabled>No previous versions available</option>'
 
         def tokens = [
-            '@OTHER_VERSIONS_OPTIONS@': optionsHtml,
-            '@GITHUB_REPO_URL@'       : "https://github.com/${githubUser}/${githubProject}",
-            '@GITHUB_ORG_URL@'        : "https://github.com/${githubUser}",
-            '@REPO_SLUG@'             : githubProject,
+                '@LATEST_VERSION@'        : latestVersion,
+                '@OTHER_VERSIONS_OPTIONS@': optionsHtml,
+                '@GITHUB_REPO_URL@'       : "https://github.com/${githubUser}/${githubProject}",
+                '@GITHUB_ORG_URL@'        : "https://github.com/${githubUser}",
+                '@PROJECT_TITLE@'         : "${projectTitle}",
+                '@PROJECT_DESCRIPTION@'   : "${projectDescription}",
+                '@PROJECT_ORG@'           : "${projectOrg}",
+                '@REPO_SLUG@'             : githubProject,
         ]
 
         def out = outputFile.get().asFile
