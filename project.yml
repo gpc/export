@@ -1,12 +1,14 @@
+---
 project:
-  title: Grails Export Plugin
-  description: A Grails plugin that adds export functionality for CSV, Excel, ODS, PDF, RTF, and XML formats.
-  org: Grails Plugin Collective (GPC)
+  title: "Grails Export Plugin"
+  description: "A Grails plugin that adds export functionality for CSV, Excel, ODS,\
+    \ PDF, RTF, and XML formats."
+  org: "Grails Plugin Collective (GPC)"
 github:
-  org: gpc
-  project: grails-export
+  org: "gpc"
+  project: "grails-export"
 license:
-  name: Apache-2.0
+  name: "Apache-2.0"
 contributors:
   graemerocher: "Graeme Rocher"
   sbglasius: "Søren Berg Glasius"
@@ -19,7 +21,7 @@ contributors:
   dauer: "Thomas Rasmussen"
   fabiooshiro: "Fabio Issamu Oshiro"
   tulu: "Ruben"
-  arturoojeda: "Arturo Ojeda"
+  arturoojeda: "Arturo Ojeda "
   cristallo: "Cristiano Limiti"
   dustindclark: "Dustin Clark"
   frangarcia: "Fran García"
