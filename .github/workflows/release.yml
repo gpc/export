@@ -178,10 +178,19 @@ jobs:
           GRADLE_PUBLISH_RELEASE: 'true'
           SOURCE_FOLDER: build/docs
           VERSION: ${{ env.VERSION }}
+  update-index:
+    name: "Update Version Index"
+    needs: [ docs ]
+    uses: ./.github/workflows/update-versions.yml
+    with:
+      branch: ${{ github.event.release.target_commitish }}
+    permissions:
+      contents: write
+    secrets: inherit
   close:
     name: "To Next Version"
     environment: close # this step will be delayed until approved
-    needs: [ publish, docs, release ]
+    needs: [ publish, docs, release, update-index ]
     runs-on: ubuntu-24.04
     permissions:
       contents: write # required for gradle.properties revert

@@ -1,6 +1,7 @@
 plugins {
     id 'config.compile'
     id 'config.grails-plugin'
+    id 'config.project-metadata'
     id 'config.publish'
     id 'config.testing'
 }
