@@ -9,6 +9,8 @@ file('../gradle.properties').withInputStream { is ->
     )
 }
 
+def projectYml = new org.yaml.snakeyaml.Yaml().load(file('../project.yml').text) as Map
+
 allprojects { project ->
     gradleProperties.stringPropertyNames().each { key ->
         project.extensions.extraProperties.set(
@@ -16,6 +18,14 @@ allprojects { project ->
                 gradleProperties.getProperty(key)
         )
     }
+
+    project.extensions.extraProperties.set('projectTitle',       projectYml.project.title as String)
+    project.extensions.extraProperties.set('projectDescription', projectYml.project.description as String)
+    project.extensions.extraProperties.set('projectOrg',         projectYml.project.org as String)
+    project.extensions.extraProperties.set('githubOrg',          projectYml.github.org as String)
+    project.extensions.extraProperties.set('githubProject',      projectYml.github.project as String)
+    project.extensions.extraProperties.set('projectLicense',     projectYml.license.name as String)
+    project.extensions.extraProperties.set('projectContributors', projectYml.contributors ?: [:])
 }
 
 dependencies {
@@ -27,4 +37,3 @@ dependencies {
     implementation 'org.apache.grails.gradle:grails-publish'
     implementation "org.asciidoctor.jvm.convert:org.asciidoctor.jvm.convert.gradle.plugin:${gradleProperties.asciidoctorVersion}"
 }
-

@@ -109,20 +109,19 @@ tasks.register('ghPagesRootIndexPage') {
                 : '<option value="" disabled>No previous versions available</option>'
 
         def tokens = [
-                '@LATEST_VERSION@'        : latestVersion,
-                '@OTHER_VERSIONS_OPTIONS@': optionsHtml,
-                '@GITHUB_REPO_URL@'       : "https://github.com/${githubOrg}/${githubProject}",
-                '@GITHUB_ORG_URL@'        : "https://github.com/${githubOrg}",
-                '@PROJECT_TITLE@'         : "${projectTitle}",
-                '@PROJECT_DESCRIPTION@'   : "${projectDescription}",
-                '@PROJECT_ORG@'           : "${projectOrg}",
-                '@REPO_SLUG@'             : githubProject,
+                LATEST_VERSION        : latestVersion,
+                OTHER_VERSIONS_OPTIONS: optionsHtml,
+                GITHUB_REPO_URL       : "https://github.com/${githubOrg}/${githubProject}",
+                GITHUB_ORG_URL        : "https://github.com/${githubOrg}",
+                PROJECT_TITLE         : "${projectTitle}",
+                PROJECT_DESCRIPTION   : "${projectDescription}",
+                PROJECT_ORG           : "${projectOrg}",
+                REPO_SLUG             : githubProject,
         ]
 
         def out = outputFile.get().asFile
         out.parentFile.mkdirs()
-        def content = templateFile.get().asFile.text
-        tokens.each { token, value -> content = content.replace(token, value) }
-        out.text = content
+        def tmpl = new groovy.text.SimpleTemplateEngine().createTemplate(templateFile.get().asFile.text)
+        out.text = tmpl.make(tokens).toString()
     }
 }
