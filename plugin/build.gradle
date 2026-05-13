@@ -1,11 +1,9 @@
-import org.gradle.api.publish.maven.tasks.GenerateMavenPom
-
 plugins {
     id 'config.compile'
     id 'config.grails-plugin'
+    id 'config.project-metadata'
     id 'config.publish'
     id 'config.testing'
-    id 'config.contributors'
 }
 
 version = projectVersion
@@ -39,29 +37,13 @@ dependencies {
 }
 
 extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
-    it.artifactId = project.name
     it.githubSlug = "${githubOrg}/${githubProject}"
-    it.license.name = 'Apache-2.0'
-    it.title = "${projectTitle}"
-    it.desc = "${projectDescription}"
+    it.license.name = projectLicense
+    it.title = projectTitle
+    it.desc = projectDescription
     it.organization {
-        it.name = "${projectOrg}"
+        it.name = projectOrg
         it.url = "https://github.com/${githubOrg}"
     }
-}
-
-pluginManager.withPlugin('maven-publish') {
-    tasks.withType(GenerateMavenPom).configureEach { pomTask ->
-        dependsOn(tasks.named('fetchContributors'))
-        doFirst {
-            pomTask.pom.developers { spec ->
-                contributorsData.get().each { String login, String displayName ->
-                    spec.developer {
-                        id = login
-                        name = displayName
-                    }
-                }
-            }
-        }
-    }
+    it.setDevelopers(projectContributors as Map)
 }

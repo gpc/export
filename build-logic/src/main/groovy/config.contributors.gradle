@@ -1,9 +1,0 @@
-
-def fetchContributors = tasks.register("fetchContributors", contributor.ContributorTask) {
-    repoOwner.convention(providers.gradleProperty('githubOrg'))
-    repoName.convention(providers.gradleProperty('githubProject'))
-    githubToken.convention(providers.environmentVariable('GITHUB_TOKEN'))
-    yamlOutput.convention(layout.buildDirectory.file("generated/contributors.yml"))
-}
-
-extensions.add("contributorsData", fetchContributors.flatMap { it.contributors })

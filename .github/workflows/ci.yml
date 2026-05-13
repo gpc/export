@@ -108,3 +108,10 @@ jobs:
         env:
           GRADLE_PUBLISH_RELEASE: 'false'
           SOURCE_FOLDER: build/docs
+  update-index:
+    if: github.repository_owner == 'gpc' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    needs: publish
+    uses: ./.github/workflows/update-versions.yml
+    permissions:
+      contents: write
+    secrets: inherit
