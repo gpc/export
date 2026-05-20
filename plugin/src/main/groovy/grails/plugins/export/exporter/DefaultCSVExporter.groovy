@@ -9,7 +9,7 @@ import com.opencsv.CSVWriter
  */
 class DefaultCSVExporter extends AbstractExporter {
 	
-	protected void exportData(OutputStream outputStream, List data, List fields) throws ExportingException{
+	protected void exportData(OutputStream outputStream, List data, List<String> fields) throws ExportingException{
 		char separator = ','
 		char quoteCharacter = '"'
 		String lineEnd = CSVWriter.DEFAULT_LINE_END

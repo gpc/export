@@ -8,7 +8,7 @@ import groovy.xml.MarkupBuilder
  */
 class DefaultXMLExporter extends AbstractExporter {
 	
-	protected void exportData(OutputStream outputStream, List data, List fields) throws ExportingException{
+	protected void exportData(OutputStream outputStream, List data, List<String> fields) throws ExportingException{
 		try {
 			// Get stream writer considering charsets
 			Writer writer = getOutputStreamWriter(outputStream)

@@ -25,7 +25,7 @@ public class DefaultRTFExporter extends AbstractExporter {
 	
 	private static Map fontStyles = [bold: Font.BOLD, italic: Font.ITALIC, normal: Font.NORMAL, bolditalic: Font.BOLDITALIC]
 	
-	protected void exportData(OutputStream outputStream, List data, List fields) throws ExportingException{
+	protected void exportData(OutputStream outputStream, List data, List<String> fields) throws ExportingException{
 		try {
 			Document document = new Document(PageSize.A4.rotate(), 36, 36, 36, 36)
 			
