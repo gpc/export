@@ -16,7 +16,7 @@ class DefaultODSExporter extends AbstractExporter {
         try {
             OdfSpreadsheetDocument spreadsheetDocument = OdfSpreadsheetDocument.newSpreadsheetDocument()
 
-            OdfTable table = spreadsheetDocument.getTableList(true).first
+            OdfTable table = spreadsheetDocument.getTableList(true).getFirst()
 
             // Enable/Disable header output
             boolean isHeaderEnabled = getParameters().getOrDefault("header.enabled", true)
