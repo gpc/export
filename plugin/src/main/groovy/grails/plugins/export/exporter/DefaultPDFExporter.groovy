@@ -1,22 +1,23 @@
 package grails.plugins.export.exporter
 
+import java.awt.Color
+
+import groovy.transform.CompileStatic
+
 import com.lowagie.text.Document
-import com.lowagie.text.DocumentException
-import com.lowagie.text.PageSize
-import com.lowagie.text.Paragraph
-import com.lowagie.text.pdf.PdfPTable
-import com.lowagie.text.pdf.PdfWriter
+import com.lowagie.text.Element
 import com.lowagie.text.Font
 import com.lowagie.text.FontFactory
+import com.lowagie.text.HeaderFooter
+import com.lowagie.text.Image
+import com.lowagie.text.PageSize
+import com.lowagie.text.Paragraph
+import com.lowagie.text.Phrase
+import com.lowagie.text.Rectangle
 import com.lowagie.text.pdf.BaseFont
 import com.lowagie.text.pdf.PdfPCell
-import com.lowagie.text.HeaderFooter
-import com.lowagie.text.Phrase
-import com.lowagie.text.Element
-import com.lowagie.text.Rectangle
-import java.awt.Color
-import java.util.Map;
-import com.lowagie.text.Image
+import com.lowagie.text.pdf.PdfPTable
+import com.lowagie.text.pdf.PdfWriter
 
 /**
  * @author Andreas Schmitt
@@ -29,7 +30,7 @@ class DefaultPDFExporter extends AbstractExporter {
 	protected void exportData(OutputStream outputStream, List data, List<String> fields) throws ExportingException{
 		try {
 			// Default to landscape in the absence of ['pdf.orientation': 'portrait'].
-			Rectangle pageSize = (getParameters().containsKey('pdf.orientation') && getParameters().get('pdf.orientation') == 'portrait') ? PageSize.A4 : PageSize.A4.rotate()
+			Rectangle pageSize = parameters.getOrDefault('pdf.orientation','landscape') == 'portrait' ? PageSize.A4 : PageSize.A4.rotate()
 			Document document = new Document(pageSize, 36, 36, 36, 36)
 			
 			PdfWriter.getInstance(document, outputStream)
