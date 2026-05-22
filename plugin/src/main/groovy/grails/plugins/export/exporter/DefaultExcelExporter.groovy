@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.IndexedColors
 @Log
 class DefaultExcelExporter extends AbstractExporter {
 
-    protected void exportData(OutputStream outputStream, List data, List fields) throws ExportingException {
+    protected void exportData(OutputStream outputStream, List data, List<String> fields) throws ExportingException {
         try {
             def builder = new ExcelBuilder()
 

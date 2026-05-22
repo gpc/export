@@ -26,7 +26,7 @@ dependencies {
     api 'com.github.librepdf:openrtf:1.2.1'
     runtimeOnly 'xerces:xercesImpl:2.12.2'
 
-    api 'org.odftoolkit:simple-odf:0.9.0'
+    api 'org.odftoolkit:odfdom-java:0.13.0'
     api 'org.apache.poi:poi:5.5.1'
     api 'org.apache.poi:poi-ooxml:5.5.1'
 

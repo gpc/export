@@ -8,6 +8,7 @@ group = 'app1'
 dependencies {
     profile 'org.apache.grails.profiles:web'
     console 'org.apache.grails:grails-console'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     implementation project(':grails-export')
 
