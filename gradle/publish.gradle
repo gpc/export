@@ -12,13 +12,13 @@ if (bintrayProperties.exists()) {
     user = project.bintrayUsername
     key = project.bintrayApiKey
 
-    githubSlug = 'gpc/grails-export'
+    githubSlug = "${project.findProperty('githubOrg')}/${project.findProperty('githubProject')}"
 
     license {
       name = 'Apache-2.0'
     }
 
-    title = "Export"
+    title = "Grails Export Plugin"
     desc = "This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML and can be extended to add additional formats."
 
 	developers = [  graemerocher: 'Graeme Rocher', 
@@ -50,7 +50,7 @@ if (githubProperties.exists()) {
   }
 
   githubPages {
-    repoUri = 'https://github.com/gpc/grails-export.git'
+    repoUri = "https://github.com/${project.findProperty('githubOrg')}/${project.findProperty('githubProject')}.git"
 
     credentials {
       username = project.hasProperty('githubApiKey') ? project.githubApiKey : ''

@@ -1,8 +1,11 @@
+import org.gradle.api.publish.maven.tasks.GenerateMavenPom
+
 plugins {
     id 'config.compile'
     id 'config.grails-plugin'
     id 'config.publish'
     id 'config.testing'
+    id 'config.contributors'
 }
 
 version = projectVersion
@@ -37,28 +40,28 @@ dependencies {
 
 extensions.configure(org.apache.grails.gradle.publish.GrailsPublishExtension) {
     it.artifactId = project.name
-    it.githubSlug = 'gpc/grails-export'
+    it.githubSlug = "${githubOrg}/${githubProject}"
     it.license.name = 'Apache-2.0'
-    it.title = 'Grails Export Plugin'
-    it.desc = 'This plugin offers export functionality supporting different formats e.g. CSV, Excel, Open Document Spreadsheet, PDF and XML and can be extended to add additional formats.'
+    it.title = "${projectTitle}"
+    it.desc = "${projectDescription}"
     it.organization {
-        it.name = 'Grails Plugin Collective (GPC)'
-        it.url = 'https://github.com/gpc'
+        it.name = "${projectOrg}"
+        it.url = "https://github.com/${githubOrg}"
     }
-    it.developers = [
-            graemerocher:'Graeme Rocher',
-            puneetbehl: 'Puneet Behl',
-            nwwells: 'Nathan Wells',
-            tulu: 'Ruben',
-            arturoojeda: 'Arturo Ojeda López',
-            fabiooshiro: 'Fabio Issamu Oshiro',
-            ddelponte: 'Dean Del Ponte',
-            cristallo: 'Cristiano Limiti',
-            mirweb: 'Mirko Weber',
-            joasgarcia: 'Joás Garcia',
-            frangarcia: 'Fran García',
-            dustindclark: 'Dustin Clark',
-            miq: 'Mihael Koep',
-            sbglasius: 'Søren Berg Glasius'
-    ]
+}
+
+pluginManager.withPlugin('maven-publish') {
+    tasks.withType(GenerateMavenPom).configureEach { pomTask ->
+        dependsOn(tasks.named('fetchContributors'))
+        doFirst {
+            pomTask.pom.developers { spec ->
+                contributorsData.get().each { String login, String displayName ->
+                    spec.developer {
+                        id = login
+                        name = displayName
+                    }
+                }
+            }
+        }
+    }
 }

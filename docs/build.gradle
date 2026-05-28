@@ -17,10 +17,9 @@ def asciidoctorAttributes = [
         idprefix            : '',
         idseparator         : '-',
         version             : project.version,
-        projectUrl          : 'https://github.com/gpc/grails-export',
+        projectUrl          : "https://github.com/${rootProject.findProperty('githubOrg')}/${rootProject.findProperty('githubProject')}",
         sourcedir           : "${rootProject.allprojects.find { it.name == 'grails-export' }.projectDir}/src/main/groovy",
         grailsVersion       : grailsVersion
-//        grailsDocBase       : "https://grails.apache.org/docs/${resolveGrailsDocsDirName(project.grailsVersion)}"
 ]
 
 tasks.named('asciidoctor', AsciidoctorTask) {
